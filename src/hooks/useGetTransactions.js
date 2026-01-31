@@ -57,6 +57,7 @@ if (data.transactionType === "expense") {
 
     useEffect(() => {
         getTransactions()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return { transactions, transactionTotals };
