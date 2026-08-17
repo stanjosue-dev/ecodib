@@ -11,6 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Étape 1 : Installer les dépendances
+      - name: Install Dependencies
+        run: npm install
+
+      # Étape 2 : Build explicite avec CI=false pour ignorer les warnings
+      - name: Build Project
+        run: npm run build
+        env:
+          CI: false
+
+      # Étape 3 : Déploiement Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

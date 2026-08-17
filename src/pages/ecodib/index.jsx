@@ -7,9 +7,8 @@ import { useGetTransactions } from "../../hooks/useGetTransactions"
 import { useGetUserInfo } from "../../hooks/useGetUserInfo"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-
-import "./styles.css"
 import { auth } from "../../config/firebase-config"
+import "./styles.css"
 
 export const Ecodib = () => {
   const { addTransaction } = useAddTransaction()
@@ -45,29 +44,27 @@ export const Ecodib = () => {
     }
   }
 
-  console.log(profilePhoto)
-
   return (
-    <>
+    <div className="ecodib-app">
       <div className="header">
-        {/* Logo moved to top-left of header */}
+        {/* Logo container */}
         <div className="logo-text-container" aria-label="Logo Ecodib et slogan">
           <svg
-  className="wallet-icon"
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  aria-hidden="true"
-  focusable="false"
->
-  <path d="M2 7h18a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2V7z" />
-  <path d="M2 7v2h18V7" />
-  <circle cx="20" cy="11" r="1.5" />
-</svg>
+            className="wallet-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M2 7h18a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2V7z" />
+            <path d="M2 7v2h18V7" />
+            <circle cx="20" cy="11" r="1.5" />
+          </svg>
           <div>
             <h1 className="title">Ecodib</h1>
             <p className="subtitle">l'App de suivi des dépenses</p>
@@ -76,7 +73,11 @@ export const Ecodib = () => {
 
         {profilePhoto && (
           <div className="profile-header">
-            <img className="profile-photo" src={profilePhoto || "/placeholder.svg"} alt="Profile" />
+            <img 
+              className="profile-photo" 
+              src={profilePhoto || "/placeholder.svg"} 
+              alt={`Profil de ${name}`} 
+            />
             <div className="user-info">
               <h2>Ecodib de {name} 👋</h2>
               <button className="sign-out-button" onClick={signUserOut}>
@@ -85,14 +86,15 @@ export const Ecodib = () => {
             </div>
           </div>
         )}
+        
         <div className="navigation">
-          <Link to="/reports">
+          <Link to="/reports" className="nav-link">
             <button className="nav-button">📊 Rapports</button>
           </Link>
-          <Link to="/budget">
+          <Link to="/budget" className="nav-link">
             <button className="nav-button">🪙 Budget</button>
           </Link>
-          <Link to="/aide">
+          <Link to="/aide" className="nav-link">
             <button className="nav-button">❓ Aide</button>
           </Link>
         </div>
@@ -118,6 +120,7 @@ export const Ecodib = () => {
           </div>
 
           <form className="add-transaction" onSubmit={onSubmit}>
+            <h3>Ajouter une transaction</h3>
             <input
               type="text"
               placeholder="Description"
@@ -158,7 +161,7 @@ export const Ecodib = () => {
               </div>
             </div>
 
-            <button type="submit">Ajouter une transaction</button>
+            <button type="submit">Ajouter la transaction</button>
           </form>
         </div>
 
@@ -166,21 +169,22 @@ export const Ecodib = () => {
           <h3>Transactions Récentes</h3>
           <ul>
             {transactions.map((transaction) => {
-              const { description, transactionAmount, transactionType } = transaction
-              const displayType = transactionType === "expense" ? "Dépenses" : "Revenus"
+              const { description, transactionAmount, transactionType, id } = transaction
+              const displayType = transactionType === "expense" ? "Dépense" : "Revenu"
 
               return (
-                <li key={transaction.id}>
-                  <h4>{description}</h4>
-                  <p>
-                    {transactionAmount} fcfa •{" "}
-                    <label
-                      style={{
-                        color: transactionType === "expense" ? "red" : "green",
-                      }}
-                    >
-                      {displayType}
-                    </label>
+                <li key={id || Math.random()}> {/* Fallback key si id manque */}
+                  <div>
+                    <h4>{description}</h4>
+                    <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>{displayType}</p>
+                  </div>
+                  <p
+                    style={{
+                      color: transactionType === "expense" ? "#dc3545" : "#28a745",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    {transactionType === "expense" ? "-" : "+"} {transactionAmount} fcfa
                   </p>
                 </li>
               )
@@ -188,6 +192,6 @@ export const Ecodib = () => {
           </ul>
         </div>
       </div>
-    </>
+    </div>
   )
 }

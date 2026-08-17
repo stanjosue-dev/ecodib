@@ -9,6 +9,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f0f2f5;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 .ecodib-app {
@@ -17,63 +18,52 @@ body {
   flex-direction: column;
 }
 
-/* Styles for Header */
+/* --- HEADER --- */
 .header {
   background: linear-gradient(135deg, #023047, #219ebc);
   color: white;
-  padding: 30px 20px; /* Increased top padding to elevate elements */
+  padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 30px; /* Increased gap between header elements */
-}
-
-/* Logo positioned at top-left */
 .logo-text-container {
   display: flex;
   align-items: center;
-  align-self: flex-start; /* Ensures it stays at the left */
+  margin-bottom: 20px;
 }
 
 .wallet-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   margin-right: 12px;
   color: white;
 }
 
 .title {
   margin: 0;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: wheat;
+  line-height: 1;
 }
 
 .subtitle {
-  margin: 4px 0 0 0;
-  font-size: 1rem;
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
   color: whitesmoke;
   font-style: italic;
+  opacity: 0.9;
 }
 
-.header-main {
+/* Profile Section */
+.profile-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-}
-
-/* Improve profile section spacing */
-.profile-header {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 15px 0; /* Added vertical margin */
+  margin: 10px 0 20px 0;
+  text-align: center;
 }
 
 .profile-photo {
@@ -81,31 +71,33 @@ body {
   height: 80px;
   border-radius: 50%;
   border: 3px solid white;
-  margin-right: 30px; /* Increased spacing between photo and info */
+  margin-bottom: 10px;
   object-fit: cover;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Added gap between name and button */
+  align-items: center;
+  gap: 10px;
 }
 
 .user-info h2 {
   margin: 0;
-  font-size: 24px;
-  line-height: 1.2; /* Improved line height for better text spacing */
+  font-size: 1.2rem;
 }
 
 .sign-out-button {
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: white;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 20px;
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
 }
 
 .sign-out-button:hover {
@@ -113,72 +105,71 @@ body {
   color: #023047;
 }
 
-/* Improve navigation button spacing */
+/* Navigation */
 .navigation {
   display: flex;
   justify-content: center;
-  gap: 25px; /* Increased gap between navigation buttons */
-  margin-top: 10px; /* Added top margin to navigation */
+  flex-wrap: wrap; /* Permet le retour à la ligne si petit écran */
+  gap: 15px;
+  margin-top: 10px;
 }
 
 .nav-button {
   background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  padding: 14px 28px; /* Increased padding for better button size */
-  border-radius: 25px;
+  padding: 10px 20px;
+  border-radius: 20px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
   text-decoration: none;
+  display: inline-block;
 }
 
 .nav-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
 }
 
-/* Main content */
+/* --- MAIN LAYOUT --- */
 .ecodib {
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 20px;
+  width: 100%;
+  /* Le Grid Layout Desktop par défaut */
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; 
   gap: 30px;
-  color: #023047;
-  flex: 1;
+  align-items: start; /* Empêche l'étirement inutile */
 }
 
-.container {
+/* --- COMPONENTS --- */
+.container, .transactions {
   background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  width: 100%;
 }
 
+/* Balance Card */
 .balance {
   text-align: center;
   background: linear-gradient(135deg, #8ecae6, #219ebc);
   color: white;
-  padding: 25px;
-  border-radius: 15px;
+  padding: 20px;
+  border-radius: 12px;
   margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(33, 158, 188, 0.2);
 }
 
-.balance h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  opacity: 0.9;
-}
+.balance h3 { margin: 0 0 5px; font-size: 0.9rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+.balance h2 { margin: 0; font-size: 2rem; font-weight: 800; }
 
-.balance h2 {
-  margin: 0;
-  font-size: 36px;
-  font-weight: bold;
-}
-
+/* Summary Income/Expense */
 .summary {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -186,66 +177,33 @@ body {
   margin-bottom: 25px;
 }
 
-.income,
-.expense {
-  padding: 20px;
-  border-radius: 10px;
+.income, .expense {
+  padding: 15px;
+  border-radius: 12px;
   text-align: center;
 }
 
-.income {
-  background: linear-gradient(135deg, #d4edda, #28a745);
-  color: white;
-}
+.income { background: rgba(40, 167, 69, 0.1); color: #28a745; }
+.expense { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
 
-.expense {
-  background: linear-gradient(135deg, #f8d7da, #dc3545);
-  color: white;
-}
+.income h4, .expense h4 { margin: 0 0 5px; font-size: 0.85rem; text-transform: uppercase; }
+.income p, .expense p { margin: 0; font-size: 1.2rem; font-weight: bold; }
 
-.income h4,
-.expense h4 {
-  margin: 0 0 10px 0;
-  font-size: 16px;
-  opacity: 0.9;
-}
-
-.income p,
-.expense p {
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.add-transaction {
-  background: #f8f9fa;
-  padding: 25px;
-  border-radius: 15px;
-  border: 2px solid #e9ecef;
-}
-
-.add-transaction h3 {
-  margin: 0 0 20px 0;
-  text-align: center;
-  color: #023047;
-}
+/* Form */
+.add-transaction h3 { text-align: center; color: #023047; margin-bottom: 20px; }
 
 .add-transaction input[type="text"],
 .add-transaction input[type="number"] {
   width: 100%;
-  padding: 12px;
+  padding: 12px 15px;
   margin-bottom: 15px;
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
-  font-size: 16px;
-  box-sizing: border-box;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 16px; /* Important pour éviter le zoom iOS */
+  transition: border-color 0.2s;
 }
 
-.add-transaction input[type="text"]:focus,
-.add-transaction input[type="number"]:focus {
-  outline: none;
-  border-color: #219ebc;
-}
+.add-transaction input:focus { outline: none; border-color: #219ebc; }
 
 .radio-group {
   display: flex;
@@ -254,160 +212,118 @@ body {
   justify-content: center;
 }
 
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.radio-option input[type="radio"] {
-  width: 18px;
-  height: 18px;
-}
-
-.radio-option label {
-  font-weight: bold;
-  cursor: pointer;
-}
+.radio-option { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.radio-option input { cursor: pointer; accent-color: #219ebc; width: 18px; height: 18px; }
 
 .add-transaction button[type="submit"] {
   width: 100%;
-  background: linear-gradient(135deg, #023047, #219ebc);
+  background: #023047;
   color: white;
   border: none;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .add-transaction button[type="submit"]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(2, 48, 71, 0.3);
+  box-shadow: 0 4px 12px rgba(2, 48, 71, 0.3);
 }
 
-/* Transactions */
-.transactions {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-.transactions h3 {
-  margin: 0 0 20px 0;
-  color: #023047;
-  font-size: 24px;
-  text-align: center;
-}
-
-.transactions ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+/* Transactions List */
+.transactions h3 { margin: 0 0 20px; color: #023047; text-align: center; }
+.transactions ul { list-style: none; padding: 0; }
 
 .transactions li {
   background: #f8f9fa;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   padding: 15px;
   border-radius: 10px;
   border-left: 4px solid #219ebc;
-  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.transactions li:hover {
-  transform: translateX(5px);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
+.transactions h4 { margin: 0; color: #023047; font-size: 1rem; }
+.transactions p { margin: 0; font-size: 0.9rem; font-weight: 600; color: #495057; }
 
-.transactions h4 {
-  margin: 0 0 5px 0;
-  color: #023047;
-  font-size: 16px;
-}
-
-.transactions p {
-  margin: 0;
-  font-size: 14px;
-  color: #6c757d;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .header {
-    padding: 25px 15px; /* Adjusted padding for mobile */
-  }
-
-  .header-content {
-    gap: 20px; /* Reduced gap slightly for mobile but still improved */
-  }
-
-  .header-main {
-    align-items: center;
-  }
-
-  .profile-header {
-    flex-direction: column;
-    text-align: center;
-    margin: 10px 0; /* Adjusted margin for mobile */
-  }
-
-  .profile-photo {
-    margin-right: 0;
-    margin-bottom: 20px; /* Increased spacing below photo on mobile */
-  }
-
-  .user-info {
-    gap: 10px; /* Adjusted gap for mobile */
-  }
-
-  .navigation {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px; /* Adjusted gap for mobile */
-    margin-top: 15px; /* Added margin for mobile */
-  }
-
-  .summary {
+/* --- RESPONSIVE / MOBILE OPTIMIZATIONS --- */
+@media (max-width: 900px) {
+  /* Tablette & Mobile : On passe le layout principal en 1 colonne */
+  .ecodib {
     grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px 15px;
   }
-
-  .radio-group {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Logo remains at top-left on mobile */
-  .logo-text-container {
-    align-self: flex-start;
-    margin-bottom: 15px;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 0.9rem;
-  }
+  
+  /* On inverse l'ordre si on veut les transactions en bas, 
+     mais par défaut l'ordre HTML est correct (Form d'abord) */
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  /* Header adjustments */
   .header {
     padding: 15px;
   }
-
-  .title {
-    font-size: 1.8rem;
+  
+  .logo-text-container {
+    justify-content: center; /* Centre le logo sur mobile */
   }
 
-  .wallet-icon {
-    width: 40px;
-    height: 40px;
+  /* Profile layout optimisé pour mobile */
+  .profile-header {
+    flex-direction: row; /* On remet en ligne pour gagner de la hauteur */
+    text-align: left;
+    gap: 15px;
+  }
+
+  .profile-photo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0;
+  }
+  
+  .user-info {
+    align-items: flex-start;
+  }
+  
+  .user-info h2 { font-size: 1rem; }
+
+  /* Navigation plus compacte */
+  .navigation {
+    gap: 10px;
+  }
+  
+  .nav-button {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    flex: 1 1 auto; /* Les boutons prennent la place dispo */
+    text-align: center;
+  }
+  
+  /* Ajustements du contenu */
+  .container, .transactions {
+    padding: 20px;
+  }
+  
+  .balance h2 { font-size: 1.8rem; }
+}
+
+@media (max-width: 480px) {
+  /* Très petits écrans */
+  .nav-button {
+    width: 100%; /* Boutons pleine largeur pour faciliter le clic */
+  }
+  
+  .summary {
+    gap: 10px;
+  }
+  
+  .radio-group {
+    justify-content: space-between;
   }
 }

@@ -26,8 +26,6 @@ export const provider = new GoogleAuthProvider()
 export const db = getFirestore(app);
 
 
-
-
 // firebase login
 // firebase initial
 // firebase deploiement
