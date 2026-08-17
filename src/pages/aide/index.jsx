@@ -12,24 +12,24 @@ const SupportComponent = () => {
 
   const developers = [
     {
-      name: "Dibopieu Josue .S",
+      name: "Stan Dibopieu",
       role: "Chef de groupe",
-      bio: "Etudiant, chargés du Backend et toute la Logique derriere l'App.",
+      bio: "Etudiant - chargé du Backend et la Logique métier.",
       avatar: "/avatr-Stan.jpg",
-      instagram: "https://www.instagram.com/stvn.___._",
+      instagram: "https://www.instagram.com/stvndibopieu",
       whatsapp: "https://wa.me/2250153003369",
     },
     {
       name: "Ekra Marc",
-      role: "Designer",
-      bio: "Etudiant, chargés du Frontend.",
+      role: "",
+      bio: "Etudiant - chargé Frontend",
       avatar: "/avatar-marco.jpg",
       whatsapp: "https://wa.me/2250594264154",
     },
     {
       name: "Coulibaly Keneya",
-      role: "Chargé BDD",
-      bio: "Etudiant, chargés de la Base de Données.",
+      role: "",
+      bio: "Etudiant - chargé design UI/UX",
       avatar: "/avatar-keneya.jpg",
       instagram: "https://instagram.com/keneyaa_c",
       whatsapp: "https://wa.me/2250705895158",
@@ -74,40 +74,30 @@ const SupportComponent = () => {
 
   // le Theme toggle
   useEffect(() => {
+  const savedTheme = localStorage.getItem("theme")
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
 
-    // verifie le theme préferer
-    const savedTheme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-
-    // utiliser le theme
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setTheme("dark")
-      document.documentElement.setAttribute("data-theme", "dark")
-    } else {
-      setTheme("light")
-      document.documentElement.setAttribute("data-theme", "light")
-    }
-
-    // memoriser le changement
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-    const handleChange = (e) => {
-      if (!localStorage.getItem("theme")) {
-        const newTheme = e.matches ? "dark" : "light"
-        setTheme(newTheme)
-        document.documentElement.setAttribute("data-theme", newTheme)
-      }
-    }
-
-    mediaQuery.addEventListener("change", handleChange)
-    return () => mediaQuery.removeEventListener("change", handleChange)
-  }, [])
-
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark"
-    setTheme(newTheme)
-    document.documentElement.setAttribute("data-theme", newTheme)
-    localStorage.setItem("theme", newTheme)
+  if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+    setTheme("dark")
+  } else {
+    setTheme("light")
   }
+
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+  const handleChange = (e) => {
+    if (!localStorage.getItem("theme")) {
+      setTheme(e.matches ? "dark" : "light")
+    }
+  }
+  mediaQuery.addEventListener("change", handleChange)
+  return () => mediaQuery.removeEventListener("change", handleChange)
+}, [])
+
+const toggleTheme = () => {
+  const newTheme = theme === "dark" ? "light" : "dark"
+  setTheme(newTheme)
+  localStorage.setItem("theme", newTheme)
+}
 
   const SunIcon = () => (
     <svg
@@ -245,7 +235,7 @@ const SupportComponent = () => {
   )
 
   return (
-    <div>
+    <div className="aide-page" data-theme={theme}>
       {/* Boutton theme */}
       <button className="support-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
         {theme === "light" ? <SunIcon /> : <MoonIcon />}
